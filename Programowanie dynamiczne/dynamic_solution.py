@@ -1,5 +1,17 @@
-def fill_optimal_solution_row(previous_row: list[int], item_weight: list[int]):
-    raise NotImplementedError
+def fill_optimal_solution_row(
+    previous_row: list[int], item_weight: list[int], item_worth: list[int], i: int
+):
+    current_row = [0 for index in range(len(previous_row))]
+    for w in len(previous_row):
+        current_row[w] = (
+            previous_row[w]
+            if item_weight[i - 1] > w
+            else max(
+                previous_row[w], item_worth[i - 1] + previous_row[w - item_worth[i - 1]]
+            )
+        )
+    return current_row
+
 
 def construct_optimal_solution(
     knapsack_weight_limit: int, item_worth: list[int], item_weight: list[int]
@@ -21,5 +33,10 @@ def construct_optimal_solution(
     for i in range(
         1, len(n + 1)
     ):  # zerowy wiersz zawiera same zera(z założenia algorytmu)
-        for w in range(W_plus_one):
-            raise NotImplementedError
+        solution_matrix[i] = fill_optimal_solution_row(
+            solution_matrix[i - 1], item_weight, item_worth, i
+        )
+    return (
+        solution_matrix[len(solution_matrix)][len(solution_matrix[0])],
+        solution_matrix,
+    )
