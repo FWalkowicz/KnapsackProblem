@@ -1,6 +1,18 @@
+def fill_optimal_solution_row(previous_row: list[int], item_weight: list[int]):
+    raise NotImplementedError
+
 def construct_optimal_solution(
     knapsack_weight_limit: int, item_worth: list[int], item_weight: list[int]
 ):
+    """
+    Rozwiązuje zero-jedynkowy problem plecakowy.
+    @Parametry
+    ---
+    `knapsack_weight_limit`: maksymalna waga zawartości plecaka
+    `item_worth`: lista wartości rzeczy, które możemy włożyć do plecaka
+    `item_weight`: lista wag rzeczy, które można włożyć do plecaka.
+                            Długość powinna być taka sama co item_worth.
+    """
     if len(item_worth) != len(item_weight):
         raise ValueError("Listy wartości i ciężarów mają różne długości.")
     n = len(item_worth)
