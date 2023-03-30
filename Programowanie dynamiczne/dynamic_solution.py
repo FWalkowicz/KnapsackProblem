@@ -86,7 +86,7 @@ def solve_01_knapsack(
         )
     except ValueError:
         return print("Listy wartości i ciężarów mają różne długości.")
-    optimal_items_indices = reconstruct_optimal_solution(matrix, item_weight)
+    optimal_items_indices = reconstruct_optimal_solution(optimal_solution_matrix, item_weight)
     optimal_items_worth = [item_worth[index - 2] for index in optimal_items_indices]
     optimal_items_weight = [item_weight[index - 2] for index in optimal_items_indices]
 
