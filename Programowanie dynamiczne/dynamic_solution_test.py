@@ -1,4 +1,4 @@
-from dynamic_solution import construct_optimal_solution
+from dynamic_solution import construct_optimal_solution, reconstruct_optimal_solution
 
 def presentation_problem_solution_should_return_296():
     max_weight = 20
@@ -28,3 +28,12 @@ if __name__ == "__main__":
         [10, 15, 40],
         65
     )
+
+    print("Test rekonstrukcji optymalnego rozwiązania")
+    max_weight = 20
+    item_weight = [5, 7, 14, 5, 14, 11, 10, 11, 7, 6]
+    item_worth = [75, 100, 94, 41, 79, 114, 106, 94, 117, 79]
+    answer, matrix = construct_optimal_solution(max_weight, item_worth, item_weight)
+    optimal_items_indices = reconstruct_optimal_solution(matrix, item_weight)
+    print([item_worth[index - 2] for index in optimal_items_indices])
+    print([item_weight[index - 2] for index in optimal_items_indices])
