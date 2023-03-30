@@ -17,15 +17,7 @@ def fill_optimal_solution_row(
 def construct_optimal_solution(
     knapsack_weight_limit: int, item_worth: list[int], item_weight: list[int]
 ):
-    """
-    Rozwiązuje zero-jedynkowy problem plecakowy.
-    @Parametry
-    ---
-    `knapsack_weight_limit`: maksymalna waga zawartości plecaka
-    `item_worth`: lista wartości rzeczy, które możemy włożyć do plecaka
-    `item_weight`: lista wag rzeczy, które można włożyć do plecaka.
-                            Długość i kolejność wartości powinna być zgodna z item_worth.
-    """
+
     if len(item_worth) != len(item_weight):
         raise ValueError("Listy wartości i ciężarów mają różne długości.")
     n = len(item_worth)
@@ -40,7 +32,13 @@ def construct_optimal_solution(
         solution_matrix,
     )
 
-def backward_solve(I: int, W: int, value_change_register_matrix: list[list[int]], item_weight: list[int]):
+
+def backward_solve(
+    I: int,
+    W: int,
+    value_change_register_matrix: list[list[int]],
+    item_weight: list[int],
+):
     knapsack_content_indices = []
     while I != 0:
         if value_change_register_matrix[I - 1][W - 1] == 1:
@@ -50,7 +48,9 @@ def backward_solve(I: int, W: int, value_change_register_matrix: list[list[int]]
     return knapsack_content_indices
 
 
-def reconstruct_optimal_solution(solution_matrix: tuple[tuple[int]], item_weight: list[int]):
+def reconstruct_optimal_solution(
+    solution_matrix: tuple[tuple[int]], item_weight: list[int]
+):
     W = len(solution_matrix[0])
     I = len(solution_matrix)
     value_change_register_matrix = [[0 for w in range(W)] for i in range(I)]
@@ -61,3 +61,32 @@ def reconstruct_optimal_solution(solution_matrix: tuple[tuple[int]], item_weight
             )
     return backward_solve(I, W, value_change_register_matrix, item_weight)
 
+
+def solve_01_knapsack(
+    knapsack_weight_limit: int, item_worth: list[int], item_weight: list[int]
+):
+    """
+    Rozwiązuje zero-jedynkowy problem plecakowy.
+    @Parametry
+    ---
+    `knapsack_weight_limit`: maksymalna waga zawartości plecaka
+    `item_worth`: lista wartości rzeczy, które możemy włożyć do plecaka
+    `item_weight`: lista wag rzeczy, które można włożyć do plecaka.
+                            Długość i kolejność wartości powinna być zgodna z item_worth.
+    """
+    try:
+        final_value, optimal_solution_matrix = construct_optimal_solution(
+            knapsack_weight_limit, item_worth, item_weight
+        )
+    except ValueError:
+        return print("Listy wartości i ciężarów mają różne długości.")
+    optimal_items_indices = reconstruct_optimal_solution(matrix, item_weight)
+    optimal_items_worth = [item_worth[index - 2] for index in optimal_items_indices]
+    optimal_items_weight = [item_weight[index - 2] for index in optimal_items_indices]
+
+    return (
+        final_value,
+        optimal_solution_matrix,
+        optimal_items_weight,
+        optimal_items_worth,
+    )
