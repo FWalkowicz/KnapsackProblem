@@ -73,6 +73,12 @@ def solve_01_knapsack(
     `item_worth`: lista wartości rzeczy, które możemy włożyć do plecaka
     `item_weight`: lista wag rzeczy, które można włożyć do plecaka.
                             Długość i kolejność wartości powinna być zgodna z item_worth.
+    @return_values
+    ---
+    - optymalna wartość plecaka
+    - macierz optymalnego rozwiązania
+    - lista wag optymalnej zawartości
+    - lista wartości optymalnej zawartości
     """
     try:
         final_value, optimal_solution_matrix = construct_optimal_solution(
