@@ -40,17 +40,24 @@ def construct_optimal_solution(
         solution_matrix,
     )
 
+def backward_solve(I: int, W: int, value_change_register_matrix: list[list[int]], item_weight: list[int]):
+    knapsack_content_indices = []
+    while I != 0:
+        if value_change_register_matrix[I - 1][W - 1] == 1:
+            knapsack_content_indices.append(I)
+            W = W - item_weight[I - 2]
+        I = I - 1
+    return knapsack_content_indices
 
 
-
-
-def reconstruct_optimal_solution(solution_matrix: tuple[tuple[int]]):
-    value_change_register_matrix = [
-        [0 for w in range(len(solution_matrix[0]))] for i in range(len(solution_matrix))
-    ]
-    for i in range(1, len(value_change_register_matrix)):
-        for w in len(value_change_register_matrix[0]):
+def reconstruct_optimal_solution(solution_matrix: tuple[tuple[int]], item_weight: list[int]):
+    W = len(solution_matrix[0])
+    I = len(solution_matrix)
+    value_change_register_matrix = [[0 for w in range(W)] for i in range(I)]
+    for i in range(I):
+        for w in range(W):
             value_change_register_matrix[i][w] = (
                 0 if solution_matrix[i][w] == solution_matrix[i - 1][w] else 1
             )
-    raise NotImplementedError
+    return backward_solve(I, W, value_change_register_matrix, item_weight)
+
