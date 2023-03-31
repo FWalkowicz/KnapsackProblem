@@ -1,4 +1,7 @@
+from typing import List
+
 from dynamic_solution import construct_optimal_solution, reconstruct_optimal_solution
+
 
 def presentation_problem_solution_should_return_296():
     max_weight = 20
@@ -12,7 +15,12 @@ def presentation_problem_solution_should_return_296():
     return print(f"not passed! returned {answer} instead of 296")
 
 
-def optimal_solution_test(max_weight: list[int], item_weight: list[int], item_worth: list[int], correct_answer: int):
+def optimal_solution_test(
+    max_weight: List[int],
+    item_weight: List[int],
+    item_worth: List[int],
+    correct_answer: int,
+):
     answer, matrix = construct_optimal_solution(max_weight, item_worth, item_weight)
     if answer == correct_answer:
         return print("Passed!")
@@ -20,14 +28,10 @@ def optimal_solution_test(max_weight: list[int], item_weight: list[int], item_wo
         print(row)
     return print(f"not passed! returned {answer} instead of {correct_answer}")
 
+
 if __name__ == "__main__":
     presentation_problem_solution_should_return_296()
-    optimal_solution_test(
-        6,
-        [1, 2, 3],
-        [10, 15, 40],
-        65
-    )
+    optimal_solution_test(6, [1, 2, 3], [10, 15, 40], 65)
 
     print("Test rekonstrukcji optymalnego rozwiązania")
     max_weight = 20
