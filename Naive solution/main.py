@@ -11,7 +11,7 @@ def sorting_knapsack(ceny, wagi):
 
 def fill_knapsack(n, waga_plecaka, cena_plecaka, posortowane):
     for j in range(n):
-        if waga_plecaka + posortowane[j][1] <= pojemnosc:
+        if waga_plecaka + posortowane[j][1] < pojemnosc:
             waga_plecaka += posortowane[j][1]
             cena_plecaka += posortowane[j][0]
     return waga_plecaka, cena_plecaka
