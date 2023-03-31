@@ -1,4 +1,5 @@
-from typing import List
+from typing import List, Tuple
+
 
 def fill_optimal_solution_row(
     previous_row: List[int], item_weight: List[int], item_worth: List[int], i: int
@@ -38,7 +39,7 @@ def construct_optimal_solution(
 def backward_solve(
     I: int,
     W: int,
-    value_change_register_matrix: list[List[int]],
+    value_change_register_matrix: List[List[int]],
     item_weight: List[int],
 ):
     knapsack_content_indices = []
@@ -51,7 +52,7 @@ def backward_solve(
 
 
 def reconstruct_optimal_solution(
-    solution_matrix: tuple[tuple[int]], item_weight: List[int]
+    solution_matrix: Tuple[Tuple[int]], item_weight: List[int]
 ):
     W = len(solution_matrix[0])
     I = len(solution_matrix)
@@ -88,7 +89,9 @@ def solve_01_knapsack(
         )
     except ValueError:
         return print("Listy wartości i ciężarów mają różne długości.")
-    optimal_items_indices = reconstruct_optimal_solution(optimal_solution_matrix, item_weight)
+    optimal_items_indices = reconstruct_optimal_solution(
+        optimal_solution_matrix, item_weight
+    )
     optimal_items_worth = [item_worth[index - 2] for index in optimal_items_indices]
     optimal_items_weight = [item_weight[index - 2] for index in optimal_items_indices]
 
