@@ -1,5 +1,7 @@
+from typing import List
+
 def fill_optimal_solution_row(
-    previous_row: list[int], item_weight: list[int], item_worth: list[int], i: int
+    previous_row: List[int], item_weight: List[int], item_worth: List[int], i: int
 ):
     current_row = [0 for index in range(len(previous_row))]
     for w in range(len(previous_row)):
@@ -15,7 +17,7 @@ def fill_optimal_solution_row(
 
 
 def construct_optimal_solution(
-    knapsack_weight_limit: int, item_worth: list[int], item_weight: list[int]
+    knapsack_weight_limit: int, item_worth: List[int], item_weight: List[int]
 ):
 
     if len(item_worth) != len(item_weight):
@@ -36,8 +38,8 @@ def construct_optimal_solution(
 def backward_solve(
     I: int,
     W: int,
-    value_change_register_matrix: list[list[int]],
-    item_weight: list[int],
+    value_change_register_matrix: list[List[int]],
+    item_weight: List[int],
 ):
     knapsack_content_indices = []
     while I != 0:
@@ -49,7 +51,7 @@ def backward_solve(
 
 
 def reconstruct_optimal_solution(
-    solution_matrix: tuple[tuple[int]], item_weight: list[int]
+    solution_matrix: tuple[tuple[int]], item_weight: List[int]
 ):
     W = len(solution_matrix[0])
     I = len(solution_matrix)
@@ -63,7 +65,7 @@ def reconstruct_optimal_solution(
 
 
 def solve_01_knapsack(
-    knapsack_weight_limit: int, item_worth: list[int], item_weight: list[int]
+    knapsack_weight_limit: int, item_worth: List[int], item_weight: List[int]
 ):
     """
     Rozwiązuje zero-jedynkowy problem plecakowy.
