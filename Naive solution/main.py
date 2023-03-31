@@ -20,43 +20,43 @@ def fill_knapsack(n, waga_plecaka, cena_plecaka, posortowane):
 def knapsack_most_valuable(pojemnosc, n, sortowanie):
     start_time = time.time()
     if pojemnosc == 0 or n == 0:
-        print("brak miejsca w plecaku lub brak przediotów")
-    else:
-        waga_plcaka = 0
-        cena_plecaka = 0
-        posortowane = sorted(sortowanie, key=lambda item: item[0], reverse=True)
-        wypelniony_plecak = fill_knapsack(n, waga_plcaka, cena_plecaka, posortowane)
-        end_time = time.time()
-        czas_programu = end_time - start_time
-        return wypelniony_plecak, czas_programu
+        return print("brak miejsca w plecaku lub brak przedmiotów")
+
+    waga_plcaka = 0
+    cena_plecaka = 0
+    posortowane = sorted(sortowanie, key=lambda item: item[0], reverse=True)
+    wypelniony_plecak = fill_knapsack(n, waga_plcaka, cena_plecaka, posortowane)
+    end_time = time.time()
+    czas_programu = end_time - start_time
+    return wypelniony_plecak, czas_programu
 
 
 def knapsack_lighest(pojemnosc, n, sortowanie):
     start_time = time.time()
     if pojemnosc == 0 or n == 0:
-        print("brak miejsca w plecaku lub brak przediotów")
-    else:
-        waga_plcaka = 0
-        cena_plecaka = 0
-        posortowane = sorted(sortowanie, key=lambda item: item[1])
-        wypelniony_plecak = fill_knapsack(n, waga_plcaka, cena_plecaka, posortowane)
-        end_time = time.time()
-        czas_programu = end_time - start_time
-        return wypelniony_plecak, czas_programu
+        return print("brak miejsca w plecaku lub brak przedmiotów")
+
+    waga_plcaka = 0
+    cena_plecaka = 0
+    posortowane = sorted(sortowanie, key=lambda item: item[1])
+    wypelniony_plecak = fill_knapsack(n, waga_plcaka, cena_plecaka, posortowane)
+    end_time = time.time()
+    czas_programu = end_time - start_time
+    return wypelniony_plecak, czas_programu
 
 
 def knapsack_weight_price_ratio(pojemnosc, n, sortowanie):
     start_time = time.time()
     if pojemnosc == 0 or n == 0:
-        print("brak miejsca w plecaku lub brak przediotów")
-    else:
-        waga_plcaka = 0
-        cena_plecaka = 0
-        posortowane = sorted(sortowanie, key=lambda item: item[2], reverse=True)
-        wypelniony_plecak = fill_knapsack(n, waga_plcaka, cena_plecaka, posortowane)
-        end_time = time.time()
-        czas_programu = end_time - start_time
-        return wypelniony_plecak, czas_programu
+        return print("brak miejsca w plecaku lub brak przedmiotów")
+
+    waga_plcaka = 0
+    cena_plecaka = 0
+    posortowane = sorted(sortowanie, key=lambda item: item[2], reverse=True)
+    wypelniony_plecak = fill_knapsack(n, waga_plcaka, cena_plecaka, posortowane)
+    end_time = time.time()
+    czas_programu = end_time - start_time
+    return wypelniony_plecak, czas_programu
 
 
 if __name__ == "__main__":
