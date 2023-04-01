@@ -22,6 +22,33 @@ To doprowadza nas do rozważenia 3 możliwych sposobów
 
 # Algorytm dokładny(programowanie dynamiczne)
 
+Tworzymy macierz o ilości wierszy równej ilości przedmiotów, jakie możemy włożyć do plecaka oraz ilości kolumn równej maksymalnej wadze plecaka.
+Komórkę w tej macierzy oznaczymy jako $V[i, w]$, gdzie $i$ oznacza $i$-ty przedmiot, a $w$ oznacza plecak o maksymalnej wadze równej $w$.
+Algorytm znajdowania optymalnej wartości polega na budowaniu optymalnej zawartości plecaka na podstawie optymalnych zawartości plecaków o mniejszej maksymalnej wadze, ale tym samym zestawie przedmiotów.
+
+Pierwszy wiersz wypełniamy zerami, natomiast następne wiersze (oznaczane literą $i$) wypełniamy kolumnami rosnąco według zasad:
+
+1. Jeśli nie możemy włożyć $i$-tego przedmiotu do plecaka ze względu na wagę, jego wartość jest taka sama jak w wierszu $i - 1$,
+2. Jeśli możemy włożyć przedmiot do plecaka, sprawdzamy jaka kombinacja zawartości plecaka ma większą wartość:
+    - obecna(przed dodaniem $i$-tego przedmiotu)
+    - optymalna zawartość dla plecaka o maksymalnej wadze równej ($w$ minus waga $i$-tego przedmiotu) po dołożeniu $i$-tego przedmiotu
+    Wybieramy wartość większą i kontynuujemy algorytm.
+
+Ostatnia komórka ostatniego wiersza zawiera łączną wartość optymalnego rozwiązania. Aby otrzymać listę przedmiotów wrzuconych do plecaka, musimy utworzyć macierz i wypełnić ją wartościami według zasady:
+
+Macierz wypełniamy kolumnami. Każdy element w kolumnie wypełniamy według warunku:
+
+1. Jeśli wartości między obecną i poprzednią komórką w kolumnie są różne, wstawiamy 1,
+2. W przeciwnym wypadku wstawiamy zero.
+
+Mając macierz zmian, możemy zrekonstruować rozwiązanie przy pomocy poniższego algorytmu. Załóżmy, że początkowo $W$ jest równe liczbie kolumn macierzy rozwiązania. Wtedy:
+
+1. Szukamy najniżej położonego wiersza, który posiada wartość 1 w kolumnie $W$,
+2. Zapisujemy indeks tego wiersza do listy, a następnie wykreślamy wszystkie wiersze poniżej oraz zmniejszamy $W$ o wagę przedmiotu o tym indeksie,
+3. Powtarzamy algorytm.
+
+Końcowym efektem jest lista indeksów przedmiotów znajdujących się w plecaku.
+
 
 # Linki
 - http://math.uni.wroc.pl/~jagiella/p2python/skrypt_html/wyklad12.html
