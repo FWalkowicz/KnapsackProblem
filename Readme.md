@@ -1,5 +1,5 @@
 # Opis 
-***Problem Plecakowy*** - polega na tym, aby spakować jak najwiecej rzeczy tak aby ich wartość byłja jak największa. Od początku wiadomo jest ile jest rzeczy oraz jaka jest ich cena oraz waga. Rzeczy możemy pakować do plecaka wielokrotnie. Upraszczając, jak zapakować plecak aby jego zawartość była jak najcenniejsza.
+***Problem Plecakowy*** - polega na tym, aby spakować jak najwiecej rzeczy tak aby ich wartość byłja jak największa. Od początku wiadomo jest ile jest rzeczy oraz jaka jest ich cena oraz waga. Rzeczy nie możemy pakować do plecaka wielokrotnie. Upraszczając, jak zapakować plecak aby jego zawartość była jak najcenniejsza.
 
 ## Matematyczny opis
 Dostarczone dane:
@@ -19,6 +19,59 @@ To doprowadza nas do rozważenia 3 możliwych sposobów
 1) Pakujemy najcenniejsze przedmioty
 2) Pakujemy najlżejsze przedmioty
 3) Pakujemy najcenniejsze przedmioty w przeliczeniu na np. 1kg
+
+Pierwszym krokiem który wykonamy w naszym programie, będzie zdefiniowanie wielkości plecaka oraz dwóch tablic odpowiednio na wagi oraz ceny przedmiotów. W ten sposób także możemy określić wielkość tablicy z wartośćiami wag i cen.
+```python
+pojemnosc = 20                                       # pojemność plecaka
+ceny = [75, 100, 94, 41, 79, 114, 106, 94, 117, 79]  # kolejne ceny przedmiotów
+wagi = [5, 7, 14, 5, 14, 11, 10, 11, 7, 6]           # kolejne wagi przedmiotów
+n = len(ceny)                                        # wielkość tablic
+```
+
+Gdy mamy zdefiniowane podstawowe informacje potrzebne do rozwiązania naszego zagadnienia, możemy utworzyć sobię nową tablicę do której wrzucimy wszystkie informacje  w celu późnejszego wygodniejszego rozwiązywania problemu. tablica będzie wielkości $3 \times n$.
+```python
+def sorting_knapsack(ceny, wagi):  
+	sortowanie = []  # pusta tablica na nasze dane 
+	for i in range(len(ceny)):  # pętla wielkośći ilośći przedmiotów
+		# indeks: 0 - cena, 1 - waga, 2 - stosunek ceny do wagi zaokrąglody do 1 miejsca
+		sortowanie.append([ceny[i], wagi[i], round(ceny[i] / wagi[i], 1)])  
+	# zwracamy wypełnioną tablice
+	return sortowanie
+```
+
+Dzięki tej operacji będziemy mogli sortować wszystkie rzeczy jednocześnie zależnie od naszych potrzeb np. po zerowym elemencie, kiedy będziemy potrzebowali najcenniejszych rzeczy, po pierwszym elemencie, kiedy będziemy potrzebowali najlżejsze rzeczy oraz po drugim elemencie, kiedy będziemy potrzebować stosunek wagi do ceny.
+
+Opiszemy tutaj jeden przypadek dla najcenniejszych rzeczy (dwa kolejne przykłady są analogiczne, różnią się tylko sortowaniem). Zaczynając nasz program musimy sprawdzić czy nasz plecak nie ma zerowej wielkości lub, czy są jakiekolwiek przedmioty do włożenia.
+```python
+start_time = time.time()  # start mierzenia czasu programu
+if pojemnosc == 0 or n == 0:  # sprawdzenie założeń 
+	return print("brak miejsca w plecaku lub brak przedmiotów")  
+  
+waga_plcaka = 0  # ustawienie początkowej wagi plecaka
+cena_plecaka = 0  # ustawienie początkowej ceny plecaka
+# sortowanie przy użyciu funkcji sorted() wbudowanej w python'a
+# sortowanie tablicy będzie się różniło w zależności od potrzeb
+posortowane = sorted(sortowanie, key=lambda item: item[0], reverse=True)
+# wypełnianie plecaka jest takie samo dla każdego sposobu
+wypelniony_plecak = fill_knapsack(n, waga_plcaka, cena_plecaka, posortowane)  
+end_time = time.time()  # zakończenie mieżenia czasu programu
+czas_programu = end_time - start_time  # końcowy czas
+return wypelniony_plecak, czas_programu
+```
+
+Wypełnianie naszego plecaka rzeczami dla wszystkich metod zachłannych odbywa się tak samo, jedyną różnicą będzie sposób sortowania naszej tablicy w zależności od interesujących nas wartości.
+```python
+def fill_knapsack(n, waga_plecaka, cena_plecaka, posortowane):  
+	for j in range(n):  
+		# sprawdzenie czy możemy dołożyć kolejny przedmiot do plecaka
+		if waga_plecaka + posortowane[j][1] < pojemnosc:  
+			# waga naszego plecaka to będzie stara waga + waga dodanego przedmiotu
+			waga_plecaka += posortowane[j][1]  
+			# wartość naszego plecaka to będzie stara wartość + wartość dodanego przedmiotu
+			cena_plecaka += posortowane[j][0]  
+	return waga_plecaka, cena_plecaka
+```
+
 
 # Algorytm dokładny(programowanie dynamiczne)
 
