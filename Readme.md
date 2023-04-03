@@ -20,7 +20,7 @@ To doprowadza nas do rozważenia 3 możliwych sposobów
 2) Pakujemy najlżejsze przedmioty
 3) Pakujemy najcenniejsze przedmioty w przeliczeniu na np. 1kg
 
-Pierwszym krokiem który wykonamy w naszym programie będzie zdefiniowanie wielkości plecaka oraz 2 tablic odpowiednio na wagi oraz ceny przedmiotów. W ten sposób także możemy okreścil wielkość tablicy z wartośćiami wag i cen.
+Pierwszym krokiem który wykonamy w naszym programie, będzie zdefiniowanie wielkości plecaka oraz dwóch tablic odpowiednio na wagi oraz ceny przedmiotów. W ten sposób także możemy określić wielkość tablicy z wartośćiami wag i cen.
 ```python
 pojemnosc = 20                                       # pojemność plecaka
 ceny = [75, 100, 94, 41, 79, 114, 106, 94, 117, 79]  # kolejne ceny przedmiotów
@@ -39,9 +39,9 @@ def sorting_knapsack(ceny, wagi):
 	return sortowanie
 ```
 
-Dzięki tej operacji będziemy mogli sortować wszystkie rzeczy jednocześnie zależnie od naszej potrzeby np. po 0 elemencie kiedy będziemy potrzebowali najcenniejszych rzeczy, po 1 elemencie kiedy będziemy potrzebowali najlżejsze rzeczy oraz po 2 elemencie kiedy będziemy potzrebować stodunek wagi do ceny.
+Dzięki tej operacji będziemy mogli sortować wszystkie rzeczy jednocześnie zależnie od naszych potrzeb np. po zerowym elemencie, kiedy będziemy potrzebowali najcenniejszych rzeczy, po pierwszym elemencie, kiedy będziemy potrzebowali najlżejsze rzeczy oraz po drugim elemencie, kiedy będziemy potrzebować stosunek wagi do ceny.
 
-Opiszemy tutaj jeden przypadej dla najcenniejszych rzeczy(dwa kolejne przykłady są analogiczne różnią się tylko sortowaniem). Zaczynając nasz program musimy sprawdzić czy nasz plecak nie ma 0 wielkości lub czy są jakiekolwiek przedmioty do włożenia.
+Opiszemy tutaj jeden przypadek dla najcenniejszych rzeczy (dwa kolejne przykłady są analogiczne, różnią się tylko sortowaniem). Zaczynając nasz program musimy sprawdzić czy nasz plecak nie ma zerowej wielkości lub, czy są jakiekolwiek przedmioty do włożenia.
 ```python
 start_time = time.time()  # start mierzenia czasu programu
 if pojemnosc == 0 or n == 0:  # sprawdzenie założeń 
@@ -59,7 +59,7 @@ czas_programu = end_time - start_time  # końcowy czas
 return wypelniony_plecak, czas_programu
 ```
 
-Wypełnianie naszego plecaka rzeczami dla wszytskich metod zachłannych odbywa się tak samo, jedyną różnicą będzie sposób sortowania naszej tablicy w zależności od interesujących nas wartości.
+Wypełnianie naszego plecaka rzeczami dla wszystkich metod zachłannych odbywa się tak samo, jedyną różnicą będzie sposób sortowania naszej tablicy w zależności od interesujących nas wartości.
 ```python
 def fill_knapsack(n, waga_plecaka, cena_plecaka, posortowane):  
 	for j in range(n):  
