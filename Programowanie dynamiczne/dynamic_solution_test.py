@@ -44,6 +44,6 @@ if __name__ == "__main__":
         for row in matrix:
             print(row)
     else:
-        optimal_items_indices = reconstruct_optimal_solution(matrix, item_weight)
+        optimal_items_indices, _ = reconstruct_optimal_solution(matrix, item_weight)
         print([item_worth[index - 2] for index in optimal_items_indices])
         print([item_weight[index - 2] for index in optimal_items_indices])

@@ -62,7 +62,10 @@ def reconstruct_optimal_solution(
             value_change_register_matrix[i][w] = (
                 0 if solution_matrix[i][w] == solution_matrix[i - 1][w] else 1
             )
-    return backward_solve(I, W, value_change_register_matrix, item_weight)
+    return (
+        backward_solve(I, W, value_change_register_matrix, item_weight),
+        value_change_register_matrix
+        )
 
 
 def solve_01_knapsack(
