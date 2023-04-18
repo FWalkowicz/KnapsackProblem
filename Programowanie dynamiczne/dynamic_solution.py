@@ -62,7 +62,10 @@ def reconstruct_optimal_solution(
             value_change_register_matrix[i][w] = (
                 0 if solution_matrix[i][w] == solution_matrix[i - 1][w] else 1
             )
-    return backward_solve(I, W, value_change_register_matrix, item_weight)
+    return (
+        backward_solve(I, W, value_change_register_matrix, item_weight),
+        value_change_register_matrix
+        )
 
 
 def solve_01_knapsack(
@@ -89,7 +92,7 @@ def solve_01_knapsack(
         )
     except ValueError:
         return print("Listy wartości i ciężarów mają różne długości.")
-    optimal_items_indices = reconstruct_optimal_solution(
+    optimal_items_indices, _ = reconstruct_optimal_solution(
         optimal_solution_matrix, item_weight
     )
     optimal_items_worth = [item_worth[index - 2] for index in optimal_items_indices]
@@ -99,5 +102,5 @@ def solve_01_knapsack(
         final_value,
         optimal_solution_matrix,
         optimal_items_weight,
-        optimal_items_worth,
+        optimal_items_worth
     )

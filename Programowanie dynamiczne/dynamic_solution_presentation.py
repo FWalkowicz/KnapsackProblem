@@ -1,7 +1,7 @@
 from dynamic_solution import solve_01_knapsack
 
 knapsack_limit = 101
-show_matrix = False
+show_matrix = True
 
 values = [79, 32, 47, 18, 26, 85, 33, 40, 45, 59]
 weights = [85, 26, 48, 21, 22, 95, 43, 45, 55, 52]
